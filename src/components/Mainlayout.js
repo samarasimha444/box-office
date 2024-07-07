@@ -1,12 +1,11 @@
 import { Outlet } from "react-router-dom";
-import Nav from "./navs"
+import Navs from "./navs";
 
-let MainLayout=()=><div>
-
-    <Nav/>
-    
-    <Outlet/>
-   
-    
-</div>
-export default MainLayout;
+export default function Mainlayout(){
+    return (
+        <div>
+            <Navs/>
+            <Outlet/>
+        </div>
+    )
+}

@@ -1,8 +1,7 @@
-import { Link } from "react-router-dom"
-let Nav=()=><div>
-
-    <Link to="/home">Home</Link><br></br>
-    <Link to="starred">starred</Link>
-
-</div>
-export default Nav;
+import { Link } from "react-router-dom";
+let Navs=()=>{
+    return <div>
+        <Link to="starred" >starred</Link>
+    </div>
+}
+export default Navs;
