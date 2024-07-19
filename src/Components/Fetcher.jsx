@@ -6,6 +6,7 @@ const useFetch=(url,query)=>{
 
     const get=async (a)=>{
         const response=await fetch(`${url}${a}`);
+        
         const data=await response.json();
         return data;
     }

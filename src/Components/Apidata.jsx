@@ -16,9 +16,9 @@ const Apidata= ({value})=>{
     
     return (
         <div>
-            {isLoading &&<div>laoding..</div>}
+            {isLoading &&<div>loading..</div>}
             {error && <div>something occured</div>}
-            {data&& data.map((a)=><div><Link to={`/${a.show.name}`}>{a.show.name}</Link></div>)}
+            {data&& data.map((a)=><div key={a.show.id}><Link to={`/${a.show.name}`}>{a.show.name}</Link></div>)}
             
         </div>
     )

@@ -1,21 +1,29 @@
 import { useParams,Link } from "react-router-dom";
 
 import useFetch from "../Components/Fetcher";
+import { useState } from "react";
+import FormComp from "../Components/Form";
+import { shows_id,show_search } from "../Components/variables";
+import Nav from "../Components/Navigators";
 
 
 
-let ShowInf=()=>{
+const ShowInf=()=>{
 
-    let {query,specific}=useParams();
-    let BaseURL1=`https://api.tvmaze.com/shows/`
-    let BaseURL2=`https://api.tvmaze.com/search/shows?q=`
-    let {isLoading,data,error}=useFetch(BaseURL1,specific)
-    let {isLoading:isLoading1,data:data1,error:error1}=useFetch(BaseURL2,query)
+    const {query,specific}=useParams();
+    const[searchedQuery,setsearchedQuery]=useState()
+    
+    const {isLoading,data,error}=useFetch(shows_id,specific)
+    const {isLoading:isLoading1,data:data1,error:error1}=useFetch(show_search,query);
+    const onchange=(ev)=>setsearchedQuery(ev.target.value)
 
     return <div>
         <div>
-            <div><Link to='/'>Home</Link></div>
-            <div><Link to={`/${query}`}>GO Back</Link></div>
+            <Nav/>
+           <FormComp query={searchedQuery} onchange={onchange} />
+            
+           
+
 
         </div>    
         <div>
@@ -23,6 +31,7 @@ let ShowInf=()=>{
             {error && <div>error</div> }
             {data && <div>
                         <div>
+                        <h1>INFO OF {data.name}</h1>
                         <div>{data.name}</div>
                         <div>{data.id}</div>
                         </div>

@@ -1,36 +1,32 @@
 import { useParams,Link } from "react-router-dom";
 
 import useFetch from "../Components/Fetcher";
+import FormComp from "../Components/Form";
+import { useState } from "react";
+import {show_search} from '../Components/variables'
+import Nav from "../Components/Navigators";
+import Datacard from "../Components/Datacard";
 
 
 
 const GenInf=()=>{
-    let BaseURL='https://api.tvmaze.com/search/shows?q=';
 
-    let {query}=useParams();
-    let {data,error,isLoading}=useFetch(BaseURL,query);
+   
+    const[searchedQuery,setsearchedQuery]=useState();
+    const onchange=(ev)=>{setsearchedQuery(ev.target.value)}
+    const {query}=useParams();
+    const {data,error,isLoading}=useFetch(show_search,query);
  
     
 
 
     return <div>
-         <div><Link to="/">Home</Link></div>
-         <div><Link to={`/`}>Go Back</Link></div>
-         <div>these are the matching results for {query}</div>
-         <div>
-            {isLoading && <div>Loading</div>}
-            {error && <div>Error</div>}
-            {data && data.map((a=><div key={a.show.id}>
-                                    <div>{a.show.name}</div>
-                                    <Link to={`/${query}/${a.show.id}`}>read more</Link>
-
-                                 </div>)) }
-            
-         </div>
-        
-       
-        
-
+          <Nav/>
+          <FormComp query={searchedQuery} onchange={onchange}/>
+          <h1>these are the matching results for {query}</h1>
+          <div>
+          <Datacard isLoading={isLoading} data={data} error={error} query={query}/>
+          </div>
         </div>
 
 
