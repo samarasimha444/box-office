@@ -23,7 +23,7 @@ const GenInf=()=>{
     return <div>
           <Nav/>
           <FormComp query={searchedQuery} onchange={onchange}/>
-          <h1>these are the matching results for {query}</h1>
+          
           <div>
           <Datacard isLoading={isLoading} data={data} error={error} query={query}/>
           </div>

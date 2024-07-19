@@ -14,7 +14,7 @@ const useFetch=(url,query)=>{
         {queryKey:[query],
             queryFn:()=>get(query),
             refetchOnWindowFocus:false,
-            retry:false,
+            retry:1,
             
         }
     )

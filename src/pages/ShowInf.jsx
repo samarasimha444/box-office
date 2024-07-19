@@ -1,10 +1,11 @@
 import { useParams,Link } from "react-router-dom";
-
 import useFetch from "../Components/Fetcher";
 import { useState } from "react";
 import FormComp from "../Components/Form";
 import { shows_id,show_search } from "../Components/variables";
 import Nav from "../Components/Navigators";
+import NoResult from "../Components/NoresultsComp.jsx";
+import PageLoader from "../Components/PageLoader.jsx";
 
 
 
@@ -22,23 +23,33 @@ const ShowInf=()=>{
             <Nav/>
            <FormComp query={searchedQuery} onchange={onchange} />
             
-           
-
-
         </div>    
         <div>
-            {isLoading&& <div>Loading..</div>}
-            {error && <div>error</div> }
+            {isLoading&& <div>
+                          <PageLoader/>
+                         </div>}
+            {error && <div>
+                       <NoResult/>
+                       </div> }
             {data && <div>
                         <div>
                         <h1>INFO OF {data.name}</h1>
-                        <div>{data.name}</div>
-                        <div>{data.id}</div>
+
+                        {data.name=='Not Found' ? <div><NoResult/></div>:<div>
+                                                                          <div>{data.name}</div>
+                                                                          <div>{data.id}</div>
+                                                                         </div> }
+                        
+                        
                         </div>
                         <h1>similar results</h1>
                         <div>
-                           {isLoading1 && <div>loading...</div>}
-                           {error1 && <div>error</div>}
+                           {isLoading1 && <div>
+                                              <PageLoader/>
+                                           </div>}
+                           {error1 && <div>
+                                          something had happend
+                                      </div>}
                            {data1 && data1.map((a=><div>
                             <div>{a.show.name}</div>
                             <div>{a.show.id}</div>

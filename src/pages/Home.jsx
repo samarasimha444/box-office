@@ -5,7 +5,7 @@ import FormComp from "../Components/Form";
 
 
 const Home=()=>{
-    const[searchValue,setsearchValue]=useState("american")
+    const[searchValue,setsearchValue]=useState("hello")
     const onchange=(ev)=>setsearchValue(ev.target.value);
 
     return (
