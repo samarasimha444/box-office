@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import NoResult from "./NoresultsComp";
 import PageLoader from "../Components/PageLoader.jsx"
 import NoInternet from "../Components/NoInternet.jsx";
+
+import ShowComp from "./showComp.jsx";
 let Datacard=({isLoading,error,data,query})=>{
  
     return(
@@ -18,18 +20,17 @@ let Datacard=({isLoading,error,data,query})=>{
                                          <NoResult/>
                                      </div>}
             {
-              data && data.length!=0 && <div>
+              data &&data.length!=0 && <div>
                        <h1>This Are The Maching Results</h1>
                        <div>
-                        {data.map((a=>{
+                        {data.map((a)=>{
                           return(
-                            <div>
-                              <div>{a.show.name}</div>
-                              <Link to={`/${query}/${a.show.id}`}>More</Link>
+                            <div key={a.show.name}>
+                              <ShowComp data={a} query={query}/>
                             </div>
-                          )
-
-                        }))}
+                          )})}
+                          
+                         
                        </div>
 
                       </div>

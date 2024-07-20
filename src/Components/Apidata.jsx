@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
+import PageLoader from "../Components/PageLoader.jsx";
+import NoInternet from "../Components/NoInternet.jsx";
 const Apidata= ({value})=>{
     let datafetch=async (offf)=>{
         let data1=await fetch(`https://api.tvmaze.com/search/shows?q=${offf}`);
@@ -16,9 +18,9 @@ const Apidata= ({value})=>{
     
     return (
         <div>
-            {isLoading &&<div>loading..</div>}
-            {error && <div>something occured</div>}
-            {data&& data.map((a)=><div key={a.show.id}><Link to={`/${a.show.name}`}>{a.show.name}</Link></div>)}
+            {isLoading &&<div><PageLoader/></div>}
+            {error && <div><NoInternet/></div>}
+            {data&& data.map((a)=><div key={a.show.id}><Link to={`show/${a.show.name}`}>{a.show.name}</Link></div>)}
             
         </div>
     )

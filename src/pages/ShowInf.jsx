@@ -1,65 +1,77 @@
-import { useParams,Link } from "react-router-dom";
-import useFetch from "../Components/Fetcher";
-import { useState } from "react";
+import { useParams} from "react-router-dom";
+import useFetch from "../Components/ShowFetcher.jsx";
+import { useReducer, useState, useEffect } from "react";
 import FormComp from "../Components/Form";
-import { shows_id,show_search } from "../Components/variables";
+import { shows_id, show_search } from "../Components/variables";
 import Nav from "../Components/Navigators";
 import NoResult from "../Components/NoresultsComp.jsx";
 import PageLoader from "../Components/PageLoader.jsx";
+import ShowComp from "../Components/showComp.jsx";
+import NoInternet from "../Components/NoInternet.jsx";
+import reducer from "../Components/Starred Logic.jsx";
+
+// Initial state for the reducer
+const initialState = [];
+
+// Reducer function to handle toggle actions
 
 
+const ShowInf = () => {
+const [state, dispatch] = useReducer(reducer, initialState);
 
-const ShowInf=()=>{
+  
+useEffect(() => {
+localStorage.setItem("starred",state)
+},
+[state]);
 
-    const {query,specific}=useParams();
-    const[searchedQuery,setsearchedQuery]=useState()
-    
-    const {isLoading,data,error}=useFetch(shows_id,specific)
-    const {isLoading:isLoading1,data:data1,error:error1}=useFetch(show_search,query);
-    const onchange=(ev)=>setsearchedQuery(ev.target.value)
+const handleClick = (value) => {
+dispatch({ type: "TOGGLE_VALUE", value })
 
-    return <div>
-        <div>
-            <Nav/>
-           <FormComp query={searchedQuery} onchange={onchange} />
-            
-        </div>    
-        <div>
-            {isLoading&& <div>
-                          <PageLoader/>
-                         </div>}
-            {error && <div>
-                       <NoResult/>
-                       </div> }
-            {data && <div>
-                        <div>
-                        <h1>INFO OF {data.name}</h1>
+};
 
-                        {data.name=='Not Found' ? <div><NoResult/></div>:<div>
-                                                                          <div>{data.name}</div>
-                                                                          <div>{data.id}</div>
-                                                                         </div> }
-                        
-                        
-                        </div>
-                        <h1>similar results</h1>
-                        <div>
-                           {isLoading1 && <div>
-                                              <PageLoader/>
-                                           </div>}
-                           {error1 && <div>
-                                          something had happend
-                                      </div>}
-                           {data1 && data1.map((a=><div>
-                            <div>{a.show.name}</div>
-                            <div>{a.show.id}</div>
-                            <Link to={`/${a.show.name}/${a.show.id}`}>Read more</Link>
-                           </div>))}
-                        </div>
+  const { query, specific } = useParams();
+  const [searchedQuery, setSearchedQuery] = useState();
 
-                     </div>}
-        </div>
-       
-         </div>
-}
+  const { isLoading, data, error } = useFetch(shows_id, specific);
+  const { isLoading: isLoading1, data: data1, error: error1 } = useFetch(show_search, query);
+  const onchange = (ev) => setSearchedQuery(ev.target.value);
+
+  return (
+    <div>
+       <Nav />
+       <FormComp query={searchedQuery} onchange={onchange} />
+       <div>
+       {isLoading && (<PageLoader/>)}
+       {error && (<NoResult />)}
+        {data && (
+          <div>
+            <div>
+              <h1>INFO OF {data.name}</h1>
+              {data.name === 'Not Found' ? (<NoResult />) : (
+                <div>
+                  <div>{data.name}</div>
+                  <div>{data.id}</div>
+                  <div dangerouslySetInnerHTML={{ __html: data.summary }}></div>
+                  <button value={data.id} onClick={(ev) => handleClick(ev.target.value)}>Star me</button>
+                </div>
+              )}
+            </div>
+            <h1>Similar Results</h1>
+            <div>
+              {isLoading1 && (<PageLoader/>)}
+              {error1 && (<NoInternet />)}
+              {data1 && data1.map((a) => (
+            <div key={a.show.id}>
+                <ShowComp data={a} query={query} />
+            </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
 export default ShowInf;

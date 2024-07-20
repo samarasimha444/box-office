@@ -1,9 +1,9 @@
 import { useParams,Link } from "react-router-dom";
 
-import useFetch from "../Components/Fetcher";
+import useFetch from "../Components/ShowFetcher";
 import FormComp from "../Components/Form";
 import { useState } from "react";
-import {show_search} from '../Components/variables'
+import {show_search,actor_search} from '../Components/variables'
 import Nav from "../Components/Navigators";
 import Datacard from "../Components/Datacard";
 

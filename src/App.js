@@ -12,8 +12,9 @@ const App=()=>{
           <Routes>
             <Route path="/" element={<Home/>}></Route>
             <Route path="/starred" element={<Starred/>}></Route>
-            <Route path="/:query" element={<GenInf/>}></Route>
-            <Route path="/:query/:specific" element={<ShowInf/>}></Route>
+            <Route path="/show/:query" element={<GenInf/>}></Route>
+            <Route path="/show/:query/:specific" element={<ShowInf/>}></Route>
+            
             <Route path="*" element={<Nopage/>}></Route>
             
           </Routes>

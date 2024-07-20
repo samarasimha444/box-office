@@ -9,8 +9,6 @@ let Nav=()=>{
             <button><Link to={'/'}>HOME</Link></button>
             <button onClick={()=>window.history.back()} >BACK</button>
             <button onClick={()=>window.history.forward()} >FORWARD</button>
-            
-           
         </div>
        
     )
