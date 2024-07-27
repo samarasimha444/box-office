@@ -1,13 +1,13 @@
 const reducer = (state, action) => {
-    switch (action.type) {
-      case 'TOGGLE_VALUE':
-        if (state.includes(action.value)) {
-          return state.filter(item => item !== action.value);
-        } else {
-          return [...state, action.value];
-        }
-      default:
-        return state;
-    }
+  switch (action.type) {
+    case 'ADD_STAR':
+      return [...state, action.payload];
+    case 'REMOVE_STAR':
+      return state.filter(id => id !== action.payload);
+    default:
+      return state;
   }
-  export default reducer; 
+};
+
+export default reducer;
+

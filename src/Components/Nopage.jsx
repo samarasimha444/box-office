@@ -1,13 +1,13 @@
 import React from 'react';
 import Lottie from 'react-lottie';
-import animationData from './nopagefound.json'; 
+import animationData from '../Components/nopagefound.json'; 
 const Nopage= () => {
   const defaultOptions = {
-    loop: true,
-    autoplay: true,
-    animationData: animationData,
-    rendererSettings: {
-      preserveAspectRatio: 'xMidYMid slice'
+  loop: true,
+  autoplay: true,
+  animationData: animationData,
+  rendererSettings: {
+  preserveAspectRatio: 'xMidYMid slice'
     }
   };
 

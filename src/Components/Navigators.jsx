@@ -1,10 +1,6 @@
 import { Link } from "react-router-dom";
-
 let Nav=()=>{
-   
-    return (
-        
-       
+   return (
         <div>
             <button><Link to={'/'}>HOME</Link></button>
             <button onClick={()=>window.history.back()} >BACK</button>

@@ -1,0 +1,56 @@
+body{
+    background-color: rgb(157, 253, 238);
+}
+.no-image{
+    height: 295px;
+    width: 215px;
+}
+#search-symbol{
+    height: 50px;
+   
+    
+
+}
+#logo{
+    height: 50px;
+    width: 50px;
+    
+}
+.row{
+    position: relative;
+    
+}
+#top-row{
+    position: relative;
+    top: 20px;
+}
+.form{
+    position: relative;
+    margin-left:200px ;
+}
+#input-div{
+    width: 500px;
+    height: 50px;
+    border-radius: 10px;
+    border-color: skyblue;
+    margin-right:10px ;  
+}
+#middle-row{
+    position: relative;
+    top: 50px;
+}
+#bottom-row{
+    position: relative;
+    top:50px;
+}
+.starred-button{
+    background-color: white;
+    text-decoration: none;
+    color: blue;
+    border-color: blue;
+    border-radius: 5px;
+    padding: 5px;
+
+  
+
+}

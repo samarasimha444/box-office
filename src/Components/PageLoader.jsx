@@ -1,7 +1,6 @@
 import React from 'react';
 import Lottie from 'react-lottie';
-import animationData from '../Components/pageloader.json'; // Replace with the path to your JSON file
-
+import animationData from '../Components/pageloader.json';
 const PageLoader = () => {
   const defaultOptions = {
     loop: true,

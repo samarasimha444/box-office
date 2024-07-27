@@ -1,6 +1,6 @@
 import React from 'react';
 import Lottie from 'react-lottie';
-import animationData from './noresults.json'; // Replace with the path to your JSON file
+import animationData from './noresults.json'; 
 
 const NoResult = () => {
   const defaultOptions = {
